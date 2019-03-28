@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spread</title>
+</head>
+<body>
+<div class="spread"></div>
+<p></p>
+<p></p>
+<p></p>
+</body>
+<script>
+    let name = "Bala Krishna Ragala";
+    let div = document.querySelector('.spread')
+    console.log(div);
+    div.innerText = name;
+    div.setAttribute('style','font-size:60px')
+    /*div.addEventListener('click', function () {
+        if (div.getAttribute('style')) {
+            div.removeAttribute('style')
+        } else {
+            div.setAttribute('style', 'letter-spacing: 2px;')
+        }
+    })*/
+    div.addEventListener('click', function () {
+        div.innerHTML = [...name].map(n=>`<span style='color:${getRandomColor()}'>${n}</span>`).join(" ")
+    })
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+</html>

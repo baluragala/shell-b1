@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EStore</title>
+
+  <script src="./node_modules/systemjs/dist/system.js"></script>
+
+</head>
+
+<body>
+  <div id="root">
+    <form id="addProductForm">
+      <fieldset>
+        <legend>Add Product</legend>
+        <div>
+          <label>Title</label>
+          <input type="text" name="title" />
+        </div>
+        <div>
+          <label>Price</label>
+          <input type="number" name="price" />
+        </div>
+        <div>
+          <label>Stock</label>
+          <input type="range" name="stock" min="1" max="100" />
+        </div>
+        <button type="submit">Save</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <script>
+    SystemJS.config({
+      packages: {
+        src: {
+          defaultExtension: 'js'
+        }
+      },
+      map: {
+        'plugin-babel': './node_modules/systemjs-plugin-babel/plugin-babel.js',
+        'systemjs-babel-build': './node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
+        'axios': "./node_modules/axios/dist/axios.js"
+      },
+      transpiler: 'plugin-babel'
+    });
+    SystemJS.import("./src/index.js")
+  </script>
+</body>
+
+</html>
