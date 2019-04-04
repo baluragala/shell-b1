@@ -1,0 +1,12 @@
+ng new blogger
+
+ng generate module shared
+
+ng generate component shared/header
+
+ng g c posts\rating -it -is --no-spec --flat
+
+
+To create pipe in shared module
+-------------------------------
+ng g p shared/likes

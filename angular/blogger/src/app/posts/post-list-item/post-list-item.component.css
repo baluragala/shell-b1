@@ -1,0 +1,19 @@
+.post {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 2px 2px #888888;
+    margin: 5px;
+}
+
+.container {
+    display: flex
+}
+
+.item {
+    margin: 10px;
+    min-width: 200px;
+}
+
+.favitem {
+    font-style: italic;
+}

@@ -1,5 +1,5 @@
-import helloA from "./a.js";
-import helloB from "./b.js";
+import { hello as helloA } from "./a.js";
+import { hello as helloB } from "./b.js";
 
 helloA();
 helloB();

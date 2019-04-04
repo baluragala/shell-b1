@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 3,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "Reactjs",
+      "desc": "Reactjs",
+      "author": "zeo",
+      "category": "frontend",
+      "id": 4
+    },
+    {
+      "title": "React Native",
+      "desc": "React Native",
+      "author": "zeo",
+      "category": "other",
+      "id": 5
+    },
+    {
+      "title": "sdfadsafdadfd",
+      "desc": "dsfasfd",
+      "author": "fdsaasdfa",
+      "category": "frontend",
+      "id": 6
+    },
+    {
+      "title": "ffasdfafsfdf",
+      "desc": "dafasd",
+      "author": "adfafsd",
+      "category": "backend",
+      "id": 7
+    },
+    {
+      "title": "afadfafsdsadfdf",
+      "desc": "dsasf",
+      "author": "adsfsdfa",
+      "category": "frontend",
+      "id": 8
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

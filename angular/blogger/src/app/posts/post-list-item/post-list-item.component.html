@@ -1,0 +1,36 @@
+<div class="post container">
+  <img
+    [src]="image"
+    alt="image"
+    style="width:120px; height:120px;align-self: center"
+  />
+  <div class="item">
+    <h2
+      [ngStyle]="
+        post.isFavorite === true
+          ? { color: 'red', backgroundColor: 'yellow' }
+          : { color: 'green', backgroundColor: 'blue' }
+      "
+    >
+      <a [routerLink]="['/posts', post.id]">{{ title | uppercase }}</a>
+    </h2>
+    <h5 [ngClass]="{ favitem: post.isFavorite }">by {{ author }}</h5>
+    <p>
+      {{ desc }}
+    </p>
+    <sb-rating [value]="post.rating"></sb-rating>
+    <p>likes : {{ 2500 | likes }}</p>
+  </div>
+  <button
+    (click)="setAsFavorite($event)"
+    *ngIf="post.isFavorite === true; else fav"
+  >
+    UNFAV
+  </button>
+
+  <ng-template #fav>
+    <button (click)="setAsFavorite($event)">
+      FAV
+    </button>
+  </ng-template>
+</div>

@@ -1,0 +1,10 @@
+<h2>Posts({{ favoriteList }})</h2>
+<sb-post-list-item
+  *ngFor="let p of posts"
+  [title]="p.title"
+  [author]="p.author"
+  [desc]="p.desc"
+  [post]="p"
+  (fav)="handleFav($event)"
+>
+</sb-post-list-item>

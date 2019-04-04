@@ -1,0 +1,48 @@
+<form [formGroup]="form">
+  <label for="title">Title</label>
+  <input
+    type="text"
+    name="title"
+    placeholder="Your title.."
+    formControlName="title"
+  />
+
+  <pre>
+
+    {{ form.controls.title.errors | json }}
+
+  </pre>
+
+  <p
+    class="error"
+    *ngIf="
+      form.controls.title.dirty === true && form.controls.title.errors?.required
+    "
+  >
+    Title is required
+  </p>
+  <p
+    class="error"
+    *ngIf="
+      form.controls.title.dirty === true &&
+      form.controls.title.errors?.minlength
+    "
+  >
+    Title must be atleast 6 chars
+  </p>
+
+  <label for="desc">Description</label>
+  <textarea required formControlName="desc"></textarea>
+
+  <label for="author">Author</label>
+  <input type="text" formControlName="author" name="author" />
+
+  <label for="category">Category</label>
+  <select name="category" formControlName="category">
+    <option value="frontend">Front End</option>
+    <option value="backend">Backend</option>
+    <option value="other">Other</option>
+  </select>
+
+  <input type="submit" value="Submit" />
+</form>
