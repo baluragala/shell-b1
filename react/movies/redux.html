@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Redux Counter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/redux-logger@3.0.6/dist/redux-logger.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux-saga/0.16.2/redux-saga.js"></script>
+  </head>
+  <body>
+    <button onclick="store.dispatch(incActionCreator(2))">INC</button>
+    <span>0</span>
+    <button onclick="store.dispatch(decActionCreator(2))">DEC</button>
+
+    <button onclick="store.dispatch(getDateActionCreator())">GET DATE</button>
+    <span>Date</span>
+    <span>Time</span>
+    <button onclick="store.dispatch(getTimeActionCreator())">GET TIME</button>
+    <button onclick="store.dispatch(getMoviesActionCreator())">
+      GET MOVIES
+    </button>
+    <script>
+      //sagas
+
+      function* getMovies() {
+        try {
+          const movies = yield fetch("http://localhost:4000/movies").then(r =>
+            r.json()
+          );
+          yield ReduxSaga.effects.put(getMoviesSuccessActionCreator(movies));
+        } catch (error) {
+          yield ReduxSaga.effects.put(getMoviesFailureActionCreator(error));
+        }
+      }
+
+      function* sagaWatcher() {
+        yield ReduxSaga.effects.takeLatest(GET_MOVIES, getMovies);
+      }
+
+      //action types
+      const INC = "INCREMENT";
+      const DEC = "DEC";
+
+      const GET_DATE = "GET_DATE";
+      const GET_TIME = "GET_TIME";
+
+      const GET_MOVIES = "GET_MOVIES";
+      const GET_MOVIES_SUCCESS = "GET_MOVIES_SUCCESS";
+      const GET_MOVIES_FAILURE = "GET_MOVIES_FAILURE";
+
+      function getMoviesActionCreator() {
+        return { type: GET_MOVIES };
+      }
+
+      function getMoviesSuccessActionCreator(movies) {
+        return {
+          type: GET_MOVIES_SUCCESS,
+          movies
+        };
+      }
+
+      function getMoviesFailureActionCreator(error) {
+        return {
+          type: GET_MOVIES_FAILURE,
+          error
+        };
+      }
+
+      //action creators
+      function incActionCreator(by) {
+        return {
+          type: INC,
+          by
+        };
+      }
+
+      function decActionCreator(by) {
+        return {
+          type: DEC,
+          by
+        };
+      }
+
+      function getDateActionCreator() {
+        return { type: GET_DATE };
+      }
+
+      function getTimeActionCreator() {
+        return { type: GET_TIME };
+      }
+
+      //redcuers
+      function counterReducer(state = { counter: 0 }, action) {
+        switch (action.type) {
+          case INC:
+            return { counter: state.counter + action.by };
+          case DEC:
+            return { counter: state.counter - action.by };
+          default:
+            return state;
+        }
+      }
+
+      function timeReducer(state = { date: "", time: "" }, action) {
+        switch (action.type) {
+          case GET_DATE:
+            return { ...state, date: new Date().toDateString() };
+          case GET_TIME:
+            return { ...state, time: new Date().toTimeString() };
+          default:
+            return state;
+        }
+      }
+
+      function movieReducer(state = { movies: [], isLoading: false }, action) {
+        switch (action.type) {
+          case GET_MOVIES:
+            return { ...state, isLoading: true };
+          case GET_MOVIES_SUCCESS:
+            return { ...state, isLoading: false, movies: action.movies };
+          default:
+            return state;
+        }
+      }
+
+      function updateUI() {
+        document.querySelectorAll(
+          "span"
+        )[0].textContent = store.getState().counterState.counter;
+        document.querySelectorAll(
+          "span"
+        )[1].textContent = store.getState().timerState.date;
+        document.querySelectorAll(
+          "span"
+        )[2].textContent = store.getState().timerState.time;
+      }
+
+      const rootReducer = Redux.combineReducers({
+        counterState: counterReducer,
+        timerState: timeReducer,
+        movieState: movieReducer
+      });
+
+      const sagaMiddleware = ReduxSaga.default();
+
+      //store
+      const store = Redux.createStore(
+        rootReducer,
+        Redux.applyMiddleware(sagaMiddleware, reduxLogger.default)
+      );
+
+      sagaMiddleware.run(sagaWatcher);
+
+      store.subscribe(updateUI);
+    </script>
+  </body>
+</html>
