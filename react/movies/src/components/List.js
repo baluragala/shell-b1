@@ -20,6 +20,7 @@ class List extends Component {
     return (
       <div>
         <h2>Movie List</h2>
+
         {/* <p>Selected Title:{this.state.selectedTitle}</p> */}
         {this.props.isLoading && <p>Loading...</p>}
         <div className="grid-container">
@@ -34,8 +35,8 @@ class List extends Component {
 
 function mapStateToProps(state) {
   return {
-    isLoading: state.movieState.isLoading,
-    movies: state.movieState.movies
+    isLoading: state.movieState.get("isLoading"),
+    movies: state.movieState.get("movies").toJS()
   };
 }
 

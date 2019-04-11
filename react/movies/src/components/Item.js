@@ -8,7 +8,7 @@ export default function Item(props) {
     <Link to={`/movies/${imdbID}`}>
       <div className="grid-item" onClick={() => props.onSelect(Title)}>
         <img src={Poster} alt="movie image" />
-        <h3>{Title}</h3>
+        <h3>{Title.toUpperCase()}</h3>
         <pre>{Year}</pre>
       </div>
     </Link>

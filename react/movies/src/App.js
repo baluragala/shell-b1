@@ -13,6 +13,7 @@ import NotFound from "./components/NotFound";
 import Detail from "./components/Detail";
 import Todo from "./components/Todo";
 import Users from "./components/Users";
+import TryCatch from "./components/TryCatch";
 
 class App extends Component {
   state = {
@@ -35,12 +36,21 @@ class App extends Component {
         <SubHeader title={this.state.title} case={this.state.case} />
         <div className="container">
           <Nav />
+
           <Switch>
             <Route
               path="/home"
               render={() => <Home prop1={this.state.title} />}
             />
-            <Route exact path="/movies" render={props => <List {...props} />} />
+            <Route
+              exact
+              path="/movies"
+              render={props => (
+                <TryCatch>
+                  <List {...props} />
+                </TryCatch>
+              )}
+            />
             <Route path="/movies/new" component={ManageMovie} />
             <Route exact path="/movies/:id" component={Detail} />
             <Route path="/todos" component={Todo} />

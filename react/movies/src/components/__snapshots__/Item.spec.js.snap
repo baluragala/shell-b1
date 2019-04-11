@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Item should have same snapshot 1`] = `
+<Link
+  to="/movies/1"
+>
+  <div
+    className="grid-item"
+    onClick={[Function]}
+  >
+    <img
+      alt="movie image"
+      src="post1"
+    />
+    <h3>
+      MOV1
+    </h3>
+    <pre>
+      2000
+    </pre>
+  </div>
+</Link>
+`;
