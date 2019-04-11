@@ -16,6 +16,9 @@ export default function Nav() {
       <li>
         <NavLink to="/movies/new">New</NavLink>
       </li>
+      <li>
+        <NavLink to="/todos">Todos</NavLink>
+      </li>
     </ul>
   );
 }

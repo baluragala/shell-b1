@@ -11,6 +11,8 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import Detail from "./components/Detail";
+import Todo from "./components/Todo";
+import Users from "./components/Users";
 
 class App extends Component {
   state = {
@@ -41,6 +43,8 @@ class App extends Component {
             <Route exact path="/movies" render={props => <List {...props} />} />
             <Route path="/movies/new" component={ManageMovie} />
             <Route exact path="/movies/:id" component={Detail} />
+            <Route path="/todos" component={Todo} />
+            <Route path="/users" component={Users} />
             <Route component={NotFound} />
           </Switch>
         </div>
