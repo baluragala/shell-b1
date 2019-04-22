@@ -42,15 +42,7 @@ class App extends Component {
               path="/home"
               render={() => <Home prop1={this.state.title} />}
             />
-            <Route
-              exact
-              path="/movies"
-              render={props => (
-                <TryCatch>
-                  <List {...props} />
-                </TryCatch>
-              )}
-            />
+            <Route exact path="/movies" render={props => <List {...props} />} />
             <Route path="/movies/new" component={ManageMovie} />
             <Route exact path="/movies/:id" component={Detail} />
             <Route path="/todos" component={Todo} />

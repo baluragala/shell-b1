@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Item from "./Item";
 import { connect } from "react-redux";
-import { getMoviesActionCreator } from "../actionCreators/movies";
+import { bindActionCreators } from "redux";
+import * as movieActionCreators from "../actionCreators/movies";
 
 class List extends Component {
   constructor() {
@@ -9,7 +10,8 @@ class List extends Component {
   }
 
   async componentDidMount() {
-    this.props.dispatch(getMoviesActionCreator());
+    //this.props.dispatch(getMoviesActionCreator());
+    this.props.getMovies();
   }
 
   changeTitle = title => {
@@ -40,6 +42,15 @@ function mapStateToProps(state) {
   };
 }
 
-const connectedComponent = connect(mapStateToProps);
+function mapDispatchToProps(dispatch) {
+  return {
+    getMoviesActionCreator: () => dispatch(getMoviesActionCreator())
+  };
+}
+
+const connectedComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
 export default connectedComponent(List);
